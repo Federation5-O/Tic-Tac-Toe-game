@@ -43,22 +43,15 @@ class Board extends React.Component{
     });
   }			
 	 renderSquare(i) {
-    return (
-      <Square
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
-      />
+		return (
+			<Square
+			value={this.props.squares[i]}
+			onClick={() => this.props.onClick(i)}
+			/>
     );
   }
 
 	render(){
-		const winner = calculateWinner(this.state.squares);
-		let status;
-		if (winner) {
-			status = 'Winner: ' + winner;
-			} else {
-			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-			}
 		return (
 			<div>
 				<div className="board-row">
@@ -82,14 +75,26 @@ class Board extends React.Component{
 }
 
 class Game extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      history: [{
+        squares: Array(9).fill(null),
+      }],
+      xIsNext: true,
+    };
+  }	
   render() {
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board 
+			squares={current.squares}
+			onClick={(i) => this.handleClick(i)}
+		  />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
+          <div>{ status }</div>
           <ol>{/* TODO */}</ol>
         </div>
       </div>
@@ -175,17 +180,16 @@ class Game extends React.Component {
     );
   }
 
+  //extremely confused, don't know where to go from here..............
   
   
   
   
   
   
-
-
-
-
-
+  
+  
+  
 
 
 
